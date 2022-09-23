@@ -5,9 +5,9 @@ import 'package:radio_app/Station.dart';
 class StationService {
   final Dio _dio;
   // Server URL at which we will be connecting to retrieve the stations data.
-  static final String _baseUrl = 'https://de1.api.radio-browser.info';
+  static const String _baseUrl = 'https://de1.api.radio-browser.info';
   // Extended URL with the root to the country list in the server.
-  static final String _stationsByCountryCode =
+  static const String _stationsByCountryCode =
       '$_baseUrl/json/stations/bycountrycodeexact/';
 
   // Constructor of this class.
@@ -33,8 +33,7 @@ class StationService {
     final Response stationsData = await _dio.get(
       validURL,
     );
-
-    // Map the JSON raw data to a list of Stations.
+    // Map the JSON raw data to a list of Stations. Get only the variables that we are interested on.
     final List<Station> stations = (stationsData.data as List)
         .map((data) => Station(data['url_resolved'], data['favicon'],
             data['name'], data['country'], data['language']))
