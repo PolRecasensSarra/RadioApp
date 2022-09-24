@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -17,6 +18,9 @@ class RadioStationPage extends StatefulWidget {
 }
 
 class _RadioStationPageState extends State<RadioStationPage> {
+  AudioPlayer audioPlayer = new AudioPlayer();
+  bool isPlaying = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +45,7 @@ class _RadioStationPageState extends State<RadioStationPage> {
               getRadioStationImage(
                 widget.station.urlImage,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30.0,
               ),
               Expanded(
@@ -101,6 +105,14 @@ class _RadioStationPageState extends State<RadioStationPage> {
                 flex: 20,
                 child: SizedBox(),
               ),
+              ElevatedButton(
+                onPressed: () {
+                  getAudio(widget.station.urlRadio);
+                },
+                child: Icon(
+                  isPlaying ? Icons.pause : Icons.play_arrow,
+                ),
+              ),
             ],
           ),
         ),
@@ -108,13 +120,27 @@ class _RadioStationPageState extends State<RadioStationPage> {
     );
   }
 
-  getRadioStationImage(String url) {
+  Widget getRadioStationImage(String url) {
     if (url.isNotEmpty) {
       return Image.network(
         widget.station.urlImage,
       );
     } else {
       return Image.asset("assets/default_image.png");
+    }
+  }
+
+  Future<void> getAudio(String url) async {
+    if (isPlaying) {
+      await audioPlayer.stop();
+      setState(() {
+        isPlaying = false;
+      });
+    } else {
+      await audioPlayer.play(UrlSource(url));
+      setState(() {
+        isPlaying = true;
+      });
     }
   }
 }
