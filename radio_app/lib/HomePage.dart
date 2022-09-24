@@ -1,4 +1,3 @@
-// ignore: file_names
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:radio_app/RadioStationPage.dart';
@@ -29,12 +28,12 @@ class _HomePageState extends State<HomePage> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 53, 53, 53),
+        backgroundColor: const Color.fromARGB(255, 53, 53, 53),
         appBar: AppBar(
           title: const Text(
             "Radio Stations List",
           ),
-          backgroundColor: Color.fromARGB(255, 37, 37, 37),
+          backgroundColor: const Color.fromARGB(255, 37, 37, 37),
           actions: const [
             Icon(
               Icons.music_note,
@@ -72,13 +71,13 @@ class _HomePageState extends State<HomePage> {
                           thumbVisibility: true,
                           controller: _controller,
                           child: ListView.builder(
-                            padding: EdgeInsets.symmetric(horizontal: 26),
+                            padding: const EdgeInsets.symmetric(horizontal: 26),
                             controller: _controller,
                             shrinkWrap: true,
                             itemCount: snapshot.data?.length,
                             itemBuilder: (context, index) {
                               return Card(
-                                color: Color.fromARGB(255, 75, 75, 75),
+                                color: const Color.fromARGB(255, 75, 75, 75),
                                 child: ListTile(
                                   leading: getRadioImage(snapshot.data![index]),
                                   title: Text(
@@ -123,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(color: Colors.tealAccent),
                         );
                       } else {
-                        return CircularProgressIndicator();
+                        return const CircularProgressIndicator();
                       }
                     },
                   ),
