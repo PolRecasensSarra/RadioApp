@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   // Method that gets all the radios by country given the necessary parameters.
   Future<List<Station>> searchRadioStations() async {
     final List<Station> stationList =
-        await stationService.getRadioStationsByCountry("ES", 0, 10);
+        await stationService.getRadioStationsByCountry("ES", 0, 30);
     return Future.value(stationList);
   }
 
